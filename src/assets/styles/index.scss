@@ -1,0 +1,45 @@
+@import "_coin";
+
+body {
+  background: url(../images/diagmonds.webp);
+  background-color: #36a2f5;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+// home
+.cryptoSearch {
+  margin-top: 70px;
+  margin-bottom: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    width: 100%;
+    max-width: 450px;
+
+    svg {
+      position: absolute;
+      font-size: 20px;
+      top: 12px;
+      right: 12px;
+    }
+  }
+}
+
+// coin detail page
+.coinDetail-con {
+  .description {
+    a {
+      text-decoration: none;
+      color: #d29b9b;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
