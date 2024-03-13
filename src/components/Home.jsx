@@ -24,9 +24,11 @@ function Home() {
       .catch((err) => console.log("error: ", err));
   }, []);
 
-  const coins = Object.values(cryptoList).filter((coin) =>
-    coin.name.toLowerCase().includes(searchCoin.toLowerCase())
-  );
+  const coins = cryptoList
+    ? Object.values(cryptoList).filter((coin) =>
+        coin.name.toLowerCase().includes(searchCoin.toLowerCase())
+      )
+    : [];
 
   return (
     <div className="home-con">
