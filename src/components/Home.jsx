@@ -24,7 +24,7 @@ function Home() {
       .catch((err) => console.log("error: ", err));
   }, []);
 
-  const coins = cryptoList.filter((coin) =>
+  const coins = Object.values(cryptoList).filter((coin) =>
     coin.name.toLowerCase().includes(searchCoin.toLowerCase())
   );
 
