@@ -24,11 +24,9 @@ function Home() {
       .catch((err) => console.log("error: ", err));
   }, []);
 
-  const coins = cryptoList
-    ? Object.values(cryptoList).filter((coin) =>
-        coin?.name.toLowerCase().includes(searchCoin)
-      )
-    : [];
+  const coins =
+    cryptoList.length > 0 &&
+    cryptoList.filter((coin) => coin.name.toLowerCase().includes(searchCoin));
 
   return (
     <div className="home-con">
@@ -48,18 +46,37 @@ function Home() {
 
       <div className="container px-5 px-sm-0">
         <div className="row g-3 g-md-5">
-          {coins.map((coin) => {
-            return (
-              <Coin
-                key={coin.id}
-                id={coin.id}
-                name={coin.name}
-                icon={coin.image}
-                price={coin.current_price}
-                symbol={coin.symbol}
-              />
-            );
-          })}
+          {searchCoin ? (
+            coins.length > 0 ? (
+              coins.map((coin) => {
+                return (
+                  <Coin
+                    key={coin.id}
+                    id={coin.id}
+                    name={coin.name}
+                    icon={coin.image}
+                    price={coin.current_price}
+                    symbol={coin.symbol}
+                  />
+                );
+              })
+            ) : (
+              <h2>No coin record.</h2>
+            )
+          ) : (
+            cryptoList.map((coin) => {
+              return (
+                <Coin
+                  key={coin.id}
+                  id={coin.id}
+                  name={coin.name}
+                  icon={coin.image}
+                  price={coin.current_price}
+                  symbol={coin.symbol}
+                />
+              );
+            })
+          )}
         </div>
       </div>
     </div>
