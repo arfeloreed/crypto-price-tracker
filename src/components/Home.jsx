@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import fetch from "node-fetch";
+// import fetch from "node-fetch";
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 // components
@@ -10,18 +11,33 @@ function Home() {
   const url =
     "https://api.coingecko.com/api/v3/coins/markets?vs_currency=php&per_page=250&precision=2";
   const myApiKey = process.env.REACT_APP_MY_API;
-  const options = {
-    method: "GET",
-    headers: { "x-cg-demo-api-key": myApiKey },
-  };
+  // const options = {
+  //   method: "GET",
+  //   headers: { "x-cg-demo-api-key": myApiKey },
+  // };
   const [cryptoList, setCryptoList] = useState([]);
   const [searchCoin, setSearchCoin] = useState("");
 
+  async function getCoins() {
+    try {
+      const response = await axios.get(url, {
+        headers: { "x-cg-demo-api-key": myApiKey },
+      });
+      setCryptoList(response.data);
+    } catch (err) {
+      console.log("error fetch: ", err);
+    }
+  }
+
+  // useEffect(() => {
+  //   fetch(url, options)
+  //     .then((res) => res.json())
+  //     .then((json) => setCryptoList(json))
+  //     .catch((err) => console.log("error: ", err));
+  // }, []);
+
   useEffect(() => {
-    fetch(url, options)
-      .then((res) => res.json())
-      .then((json) => setCryptoList(json))
-      .catch((err) => console.log("error: ", err));
+    getCoins();
   }, []);
 
   const coins =
