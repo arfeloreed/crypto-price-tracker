@@ -26,7 +26,7 @@ function Home() {
 
   const coins = cryptoList
     ? Object.values(cryptoList).filter((coin) =>
-        coin.name.toLowerCase().includes(searchCoin.toLowerCase())
+        coin?.name.toLowerCase().includes(searchCoin)
       )
     : [];
 
@@ -40,7 +40,7 @@ function Home() {
             type="text"
             placeholder="Enter coin name..."
             className="form-control form-control-lg"
-            onChange={(ev) => setSearchCoin(ev.target.value)}
+            onChange={(ev) => setSearchCoin(ev.target.value.toLowerCase())}
           />
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </span>
